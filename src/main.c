@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
 	while (1) {
 	
-		poll(serial_fd, 1, 2000);
+		int r = poll(serial_fd, 1, 2000);
 
 		int nread = read(fd, buf, 64);
 		if (nread > 0) {
