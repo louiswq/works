@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
+#include <poll.h>
 
 #include "serial.h"
 
@@ -50,9 +51,14 @@ int main(int argc, char *argv[])
 		printf("open failed\r\n");
 	}
 
+
+	struct pollfd serial_fd[1];
+	serial_fd[0].fd = fd;
+	serial_fd[0].events = POLLRDNORM;
+
 	while (1) {
 	
-		//pool();
+		poll(serial_fd, 1, 2000);
 
 		int nread = read(fd, buf, 64);
 		if (nread > 0) {
